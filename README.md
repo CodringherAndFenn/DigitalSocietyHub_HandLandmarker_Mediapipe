@@ -1,0 +1,1 @@
+# DigitalSocietyHub_HandLandmarker_Mediapipe
