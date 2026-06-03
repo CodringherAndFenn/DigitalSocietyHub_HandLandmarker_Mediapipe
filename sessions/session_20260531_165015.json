@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "session_id": "20260531_165015",
+  "saved_at": "2026-05-31T14:50:15.684004+00:00",
+  "summary": {
+    "total_duration_seconds": 414.9,
+    "exercises_performed": 2,
+    "total_reps": 11,
+    "total_correct_reps": 11,
+    "overall_accuracy_pct": 100.0
+  },
+  "exercises": [
+    {
+      "exercise_name": "Fist Open/Close",
+      "display_name": "Fist Open/Close",
+      "start_time": "2026-05-31T14:24:06.902962+00:00",
+      "end_time": "2026-05-31T14:26:52.507247+00:00",
+      "duration_seconds": 165.6,
+      "total_reps": 2,
+      "correct_reps": 2,
+      "accuracy_pct": 100.0,
+      "reps": [
+        {
+          "rep_number": 1,
+          "timestamp": "2026-05-31T14:24:08.734949+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 2,
+          "timestamp": "2026-05-31T14:24:39.135563+00:00",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "exercise_name": "Fist Open/Close",
+      "display_name": "Fist Open/Close",
+      "start_time": "2026-05-31T14:46:06.317925+00:00",
+      "end_time": "2026-05-31T14:50:15.651690+00:00",
+      "duration_seconds": 249.3,
+      "total_reps": 9,
+      "correct_reps": 9,
+      "accuracy_pct": 100.0,
+      "reps": [
+        {
+          "rep_number": 1,
+          "timestamp": "2026-05-31T14:46:37.746695+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 2,
+          "timestamp": "2026-05-31T14:47:06.815371+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 3,
+          "timestamp": "2026-05-31T14:47:07.215356+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 4,
+          "timestamp": "2026-05-31T14:47:08.979347+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 5,
+          "timestamp": "2026-05-31T14:47:09.215483+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 6,
+          "timestamp": "2026-05-31T14:47:34.616024+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 7,
+          "timestamp": "2026-05-31T14:47:36.348023+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 8,
+          "timestamp": "2026-05-31T14:49:58.083353+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 9,
+          "timestamp": "2026-05-31T14:50:10.983611+00:00",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}

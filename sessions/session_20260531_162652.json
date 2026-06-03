@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "session_id": "20260531_162652",
+  "saved_at": "2026-05-31T14:26:52.534797+00:00",
+  "summary": {
+    "total_duration_seconds": 165.6,
+    "exercises_performed": 1,
+    "total_reps": 2,
+    "total_correct_reps": 2,
+    "overall_accuracy_pct": 100.0
+  },
+  "exercises": [
+    {
+      "exercise_name": "Fist Open/Close",
+      "display_name": "Fist Open/Close",
+      "start_time": "2026-05-31T14:24:06.902962+00:00",
+      "end_time": "2026-05-31T14:26:52.507247+00:00",
+      "duration_seconds": 165.6,
+      "total_reps": 2,
+      "correct_reps": 2,
+      "accuracy_pct": 100.0,
+      "reps": [
+        {
+          "rep_number": 1,
+          "timestamp": "2026-05-31T14:24:08.734949+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 2,
+          "timestamp": "2026-05-31T14:24:39.135563+00:00",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}

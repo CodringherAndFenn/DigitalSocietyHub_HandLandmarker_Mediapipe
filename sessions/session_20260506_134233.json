@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "session_id": "20260506_134233",
+  "saved_at": "2026-05-06T11:42:33.712018+00:00",
+  "summary": {
+    "total_duration_seconds": 12.8,
+    "exercises_performed": 1,
+    "total_reps": 8,
+    "total_correct_reps": 8,
+    "overall_accuracy_pct": 100.0
+  },
+  "exercises": [
+    {
+      "exercise_name": "Fist Open/Close",
+      "display_name": "Fist Open/Close",
+      "start_time": "2026-05-06T11:42:20.883676+00:00",
+      "end_time": "2026-05-06T11:42:33.683996+00:00",
+      "duration_seconds": 12.8,
+      "total_reps": 8,
+      "correct_reps": 8,
+      "accuracy_pct": 100.0,
+      "reps": [
+        {
+          "rep_number": 1,
+          "timestamp": "2026-05-06T11:42:22.479767+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 2,
+          "timestamp": "2026-05-06T11:42:23.547766+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 3,
+          "timestamp": "2026-05-06T11:42:25.579719+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 4,
+          "timestamp": "2026-05-06T11:42:26.779750+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 5,
+          "timestamp": "2026-05-06T11:42:30.279912+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 6,
+          "timestamp": "2026-05-06T11:42:31.148066+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 7,
+          "timestamp": "2026-05-06T11:42:31.711867+00:00",
+          "correct": true
+        },
+        {
+          "rep_number": 8,
+          "timestamp": "2026-05-06T11:42:32.812127+00:00",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}
