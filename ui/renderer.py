@@ -1,11 +1,12 @@
 """
 All drawing operations. Stateless — every screen function receives a drawing
-surface (a plain dark canvas for the no-camera menus, or the raw full-size
+surface (a plain cream canvas for the no-camera menus, or the raw full-size
 camera frame for camera phases), draws onto it, and returns a HitMap of
 clickable regions.
 
-Look: basic OpenCV styling — dark background, plain rectangles, white/green/
-amber text. The Wireframe3 layout (title bar chrome, button stacks, keycap
+Look: basic OpenCV styling in the gruvbox light palette — cream background,
+plain rectangles, blue buttons with white text, red window diamonds, dark
+keycap cases. The Wireframe3 layout (title bar chrome, button stacks, keycap
 legends) is kept; only the visual style is plain.
 
 Scaling: everything was designed at 1280x720. Each screen computes a scale
@@ -35,21 +36,25 @@ def _asset(relative_path: str) -> str:
     return os.path.join(base, relative_path)
 
 
-# --- Palette (BGR). THEME_PIL is the RGB mirror, derived automatically. ---
+# --- Palette (BGR), gruvbox light. THEME_PIL is the RGB mirror, derived automatically. ---
 THEME = {
-    'app_bg':          (16, 16, 16),      # dark background everywhere
-    'titlebar_fill':   (32, 32, 32),
-    'outline':         (120, 120, 120),
-    'button_fill':     (44, 44, 44),
-    'button_hover':    (70, 70, 70),
-    'button_selected': (0, 100, 0),       # dark green fill for the selection
-    'keycap_fill':     (52, 52, 52),
-    'text_main':       (235, 235, 235),   # white
-    'text_dim':        (155, 155, 155),
+    'app_bg':          (215, 245, 249),   # #f9f5d7 bg0_h cream background everywhere
+    'titlebar_fill':   (178, 219, 235),   # #ebdbb2 bg1
+    'outline':         (100, 111, 124),   # #7c6f64 gray
+    'button_fill':     (136, 133, 69),    # #458588 blue — white text on top
+    'button_hover':    (161, 157, 88),    # #589da1 lightened button blue
+    'button_selected': (14, 116, 121),    # #79740e green fill for the selection
+    'button_text':     (245, 245, 245),   # white — buttons + keycaps (dark fills)
+    'keycap_fill':     (54, 56, 60),      # #3c3836 fg — dark controls cases
+    'chrome_btn':      (29, 36, 204),     # #cc241d red — min/max/quit diamonds
+    'chrome_btn_hover': (6, 0, 157),      # #9d0006 dark red
+    'settings_fill':   (14, 93, 214),     # #d65d0e orange — SETTINGS oval
+    'text_main':       (54, 56, 60),      # #3c3836 fg
+    'text_dim':        (84, 92, 102),     # #665c54 fg3
     'text_light':      (245, 245, 245),
-    'accent_good':     (0, 200, 0),       # green
-    'accent_warn':     (0, 170, 255),     # amber
-    'panel_dark':      (16, 16, 16),      # translucent overlays on camera view
+    'accent_good':     (14, 116, 121),    # #79740e green
+    'accent_warn':     (14, 93, 214),     # #d65d0e orange
+    'panel_fill':      (215, 245, 249),   # translucent overlays on camera view
     'landmark':        (0, 255, 0),
     'connection':      (0, 0, 255),
 }
@@ -172,14 +177,14 @@ def _in_rect(pos, rect) -> bool:
 
 
 def _dim_region(canvas, rect, alpha=0.6, color=None):
-    """Blend a dark translucent panel over a region (readable text on camera)."""
+    """Blend a translucent panel over a region (readable text on camera)."""
     x1, y1, x2, y2 = rect
     x1, y1 = max(0, x1), max(0, y1)
     x2, y2 = min(canvas.shape[1], x2), min(canvas.shape[0], y2)
     if x2 <= x1 or y2 <= y1:
         return
     roi = canvas[y1:y2, x1:x2]
-    overlay = np.full_like(roi, color if color is not None else THEME['panel_dark'])
+    overlay = np.full_like(roi, color if color is not None else THEME['panel_fill'])
     cv2.addWeighted(overlay, alpha, roi, 1 - alpha, 0, roi)
 
 
@@ -203,18 +208,32 @@ def draw_window_chrome(canvas, tq: _TextQueue, hitmap: HitMap, hover=None,
     # min/max/quit diamonds (min is decorative — cv2 has no portable iconify)
     dia_cy = tb_bottom // 2
     r_d = S(10)
+    g = S(4)  # glyph half-size inside the diamond
     for i, name in enumerate(('chrome_min', 'chrome_max', 'chrome_quit')):
         cx = S(30) + i * S(34)
         rect = (cx - r_d - 4, dia_cy - r_d - 4, cx + r_d + 4, dia_cy + r_d + 4)
         pts = np.array([(cx, dia_cy - r_d), (cx + r_d, dia_cy),
                         (cx, dia_cy + r_d), (cx - r_d, dia_cy)], np.int32)
-        if name != 'chrome_min' and _in_rect(hover, rect):
-            hover_fill = THEME['accent_warn'] if name == 'chrome_quit' else THEME['button_hover']
-            cv2.fillPoly(canvas, [pts], hover_fill)
+        hovered = name != 'chrome_min' and _in_rect(hover, rect)
+        cv2.fillPoly(canvas, [pts],
+                     THEME['chrome_btn_hover'] if hovered else THEME['chrome_btn'])
         cv2.polylines(canvas, [pts], True, THEME['outline'], 2)
+        if name == 'chrome_min':
+            cv2.line(canvas, (cx - g, dia_cy), (cx + g, dia_cy),
+                     THEME['button_text'], 2)
+        elif name == 'chrome_max':
+            cv2.rectangle(canvas, (cx - g, dia_cy - g), (cx + g, dia_cy + g),
+                          THEME['button_text'], 1)
+        else:
+            cv2.line(canvas, (cx - g, dia_cy - g), (cx + g, dia_cy + g),
+                     THEME['button_text'], 2)
+            cv2.line(canvas, (cx - g, dia_cy + g), (cx + g, dia_cy - g),
+                     THEME['button_text'], 2)
         hitmap.add(name, rect)
 
     # SETTINGS oval — decorative placeholder for a future settings screen
+    cv2.ellipse(canvas, (w - S(44), dia_cy), (S(24), S(13)), 0, 0, 360,
+                THEME['settings_fill'], -1)
     cv2.ellipse(canvas, (w - S(44), dia_cy), (S(24), S(13)), 0, 0, 360,
                 THEME['outline'], 2)
 
@@ -236,7 +255,7 @@ def _draw_button(canvas, tq: _TextQueue, rect, label, *,
     cv2.rectangle(canvas, (x1, y1), (x2, y2),
                   THEME['accent_good'] if selected else THEME['outline'], 2)
     tq.put_centered((x1 + x2) // 2, (y1 + y2) // 2, label, size,
-                    THEME_PIL['text_main'], bold=True)
+                    THEME_PIL['button_text'], bold=True)
 
 
 def _draw_scrollbar(canvas, hitmap: HitMap, x1, top, x2, bottom,
@@ -261,7 +280,7 @@ def _draw_scrollbar(canvas, hitmap: HitMap, x1, top, x2, bottom,
         pts = np.array([(cx - a, my + base),
                         (cx + a, my + base),
                         (cx, my - base)], np.int32)
-        cv2.fillPoly(canvas, [pts], THEME['text_main'])
+        cv2.fillPoly(canvas, [pts], THEME['button_text'])
         hitmap.add(name, rect)
 
     cv2.rectangle(canvas, (x1, track_top), (x2, track_bottom), THEME['outline'], 1)
@@ -311,13 +330,13 @@ def draw_keycap_legend(canvas, tq: _TextQueue, hitmap: HitMap, content_rect,
             y_a, y_b = row_y + cap_h - S(13), row_y + S(13)
             if glyph == 'UP':
                 cv2.arrowedLine(canvas, (acx, y_a), (acx, y_b),
-                                THEME['text_main'], 2, tipLength=0.5)
+                                THEME['button_text'], 2, tipLength=0.5)
             else:
                 cv2.arrowedLine(canvas, (acx, y_b), (acx, y_a),
-                                THEME['text_main'], 2, tipLength=0.5)
+                                THEME['button_text'], 2, tipLength=0.5)
         else:
             tq.put_centered(acx, row_y + cap_h // 2, glyph, max(10, S(15)),
-                            THEME_PIL['text_main'], bold=True)
+                            THEME_PIL['button_text'], bold=True)
         tq.put_centered(acx, row_y + cap_h + S(12), label, max(10, S(13)),
                         THEME_PIL['text_dim'])
         if region:
@@ -662,9 +681,9 @@ def draw_exercise_hud(frame, exercise_name: str,
     # Top info strip under the title bar
     _dim_region(frame, (0, bar_h, w, bar_h + S(64)), 0.65)
     tq.put((S(12), bar_h + S(6)), exercise_name, max(12, S(22)),
-           THEME_PIL['text_light'], bold=True)
+           THEME_PIL['text_main'], bold=True)
     tq.put((S(12), bar_h + S(38)), f"{accuracy}{acc_pct}", max(10, S(16)),
-           THEME_PIL['text_light'])
+           THEME_PIL['text_main'])
 
     # Rep counter box
     bx1, by1 = S(10), bar_h + S(76)
@@ -672,9 +691,9 @@ def draw_exercise_hud(frame, exercise_name: str,
     _dim_region(frame, (bx1, by1, bx2, by2), 0.65)
     box_cx = (bx1 + bx2) // 2
     tq.put_centered(box_cx, by1 + S(24), STRINGS["hud_reps_label"], max(10, S(14)),
-                    THEME_PIL['text_light'])
+                    THEME_PIL['text_main'])
     tq.put_centered(box_cx, by1 + S(88), str(reps), max(24, S(68)),
-                    THEME_PIL['text_light'], bold=True)
+                    THEME_PIL['text_main'], bold=True)
 
     # Badge (Good rep! / Try again) — top-right under the title bar
     if badge_text:
@@ -696,7 +715,7 @@ def draw_exercise_hud(frame, exercise_name: str,
     if feedback:
         _dim_region(frame, (0, h - banner_h - S(46), w, h - banner_h), 0.65)
         tq.put_centered(mid_x, h - banner_h - S(23), feedback, max(11, S(18)),
-                        THEME_PIL['text_light'])
+                        THEME_PIL['text_main'])
 
     btn_w = min(S(680), w - S(60))
     rect = (mid_x - btn_w // 2, h - banner_h + S(10), mid_x + btn_w // 2, h - S(34))
