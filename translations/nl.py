@@ -27,32 +27,35 @@ STRINGS: dict[str, str] = {
     "motiv_3":  "U doet het goed!",
     "motiv_1":  "Goed begin — ga zo door!",
 
+    # Window chrome + keycap legend
+    "chrome_title":        "HandTracker6000",
+    "legend_header":       "ZO BEDIENT U DE APPLICATIE",
+    "legend_confirm":      "bevestigen",
+    "legend_up":           "omhoog",
+    "legend_down":         "omlaag",
+    "legend_back":         "terug",
+    "legend_new_exercise": "nieuwe oefening",
+    "key_space_label":     "SPATIE",
+
     # Injury menu
-    "injury_menu_header":   "HAND REVALIDATIE TRACKER",
-    "injury_menu_subtitle": "Selecteer uw blessuretype:",
-    "injury_menu_hint":     "De oefeningen worden afgestemd op uw aandoening.",
-    "injury_menu_nav":      "Gebruik ↑↓ pijlen of toetsen 1–4 om te kiezen",
-    "injury_menu_confirm":  "Druk op ENTER om te bevestigen",
-    "injury_menu_quit":     "Druk op Q om af te sluiten",
+    "injury_heading":   "BEVESTIG UW BLESSURETYPE(S)",
+    "injury_menu_hint": "De oefeningen worden afgestemd op uw aandoening.",
 
     # Exercise menu
-    "menu_header":   "HAND REVALIDATIE TRACKER",
-    "menu_subtitle": "Selecteer Oefening:",
-    "menu_nav":      "Gebruik ↑↓ pijlen of toetsen 1–8 om te kiezen",
-    "menu_start":    "Druk op ENTER om te starten",
-    "menu_quit":     "Druk op Q om af te sluiten",
+    "menu_heading": "WELKE OEFENING WILT U DOEN?",
 
     # HUD
     "hud_waiting":      "Wacht op eerste herhaling...",
     "hud_correct_of":   "{correct}/{reps} correct",
     "hud_accuracy_pct": "  ({pct}%)",
     "hud_reps_label":   "REPS",
-    "hud_hints":        "Druk op SPATIE om te stoppen   Druk op Q om af te sluiten",
+    "hud_pause_hint":   "Druk op P om te pauzeren",
+    "btn_end_exercise": "DRUK OP SPATIE OM DE OEFENING TE STOPPEN",
 
     # Calibration
-    "calib_header":          "HAND KALIBRATIE",
-    "calib_intro":           "We meten uw persoonlijk bewegingsbereik in {n} houdingen. Houd elke houding aan als gevraagd — druk op S om over te slaan en de standaardinstellingen te gebruiken.",
-    "calib_begin":           "Druk op ENTER om te beginnen",
+    "calib_intro_heading":   "UW HAND LEREN KENNEN",
+    "calib_intro_body":      "Houd uw hand plat en naar de camera gericht. Kalibratie betekent simpelweg dat de app aan uw hand went — houd elke houding aan als gevraagd, de rest gaat vanzelf.",
+    "btn_start_calibration": "DRUK OP SPATIE OM DE KALIBRATIE TE STARTEN",
     "calib_skip_hint":       "Druk op S om kalibratie over te slaan en standaardinstellingen te gebruiken",
     "calib_progress_header": "KALIBRATIE  ({n} / {total})",
     "calib_ready_prompt":    "Druk op SPATIE als u in positie bent",
@@ -61,7 +64,8 @@ STRINGS: dict[str, str] = {
     "calib_done":            "Klaar!",
     "calib_complete":        "Kalibratie voltooid!",
     "calib_skipped":         "Kalibratie overgeslagen — standaardinstellingen worden gebruikt.",
-    "calib_continue":        "Druk op ENTER om de oefening te beginnen",
+    "calib_done_body":       "Hierna begint de echte oefening — geen zorgen, het zijn dezelfde bewegingen die u zojuist heeft geoefend. Doe gewoon de bewegingen.",
+    "btn_start_exercise":    "DRUK OP SPATIE OM DE OEFENING TE STARTEN",
 
     # Pause
     "pause_header":    "GEPAUZEERD",
@@ -75,10 +79,10 @@ STRINGS: dict[str, str] = {
     "report_col_reps":     "Herh.",
     "report_col_correct":  "Correct",
     "report_col_accuracy": "Nauwk.",
-    "report_total":        "Totaal",
-    "report_duration":     "Duur: {m}m {s}s",
-    "report_saved":        "Opgeslagen:  {filename}",
-    "report_hints":        "Druk op ENTER voor nieuwe sessie   Druk op Q om af te sluiten",
+    "report_total":         "Totaal",
+    "report_duration":      "Duur: {m}m {s}s",
+    "report_saved":         "Opgeslagen:  {filename}",
+    "report_encouragement": "Goed gedaan — elke sessie telt!",
 
     # Calibration pose titles and instructions
     "pose_open_title":           "Open Hand",

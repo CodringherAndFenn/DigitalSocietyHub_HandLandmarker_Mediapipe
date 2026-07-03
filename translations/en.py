@@ -27,32 +27,35 @@ STRINGS: dict[str, str] = {
     "motiv_3":  "You're doing well!",
     "motiv_1":  "Great start — keep going!",
 
+    # Window chrome + keycap legend
+    "chrome_title":        "HandTracker6000",
+    "legend_header":       "HOW TO CONTROL THE APPLICATION",
+    "legend_confirm":      "confirm",
+    "legend_up":           "go up",
+    "legend_down":         "go down",
+    "legend_back":         "go back",
+    "legend_new_exercise": "new exercise",
+    "key_space_label":     "SPACE",
+
     # Injury menu
-    "injury_menu_header":   "HAND REHAB TRACKER",
-    "injury_menu_subtitle": "Select your injury type:",
-    "injury_menu_hint":     "Exercises will be tailored to your condition.",
-    "injury_menu_nav":      "Use ↑↓ arrows or keys 1–4 to choose",
-    "injury_menu_confirm":  "Press ENTER to confirm",
-    "injury_menu_quit":     "Press Q to quit",
+    "injury_heading":   "PLEASE CONFIRM YOUR INJURY TYPE/S",
+    "injury_menu_hint": "Exercises will be tailored to your condition.",
 
     # Exercise menu
-    "menu_header":   "HAND REHAB TRACKER",
-    "menu_subtitle": "Select Exercise:",
-    "menu_nav":      "Use ↑↓ arrows or keys 1–8 to choose",
-    "menu_start":    "Press ENTER to start",
-    "menu_quit":     "Press Q to quit",
+    "menu_heading": "WHAT EXERCISE WOULD YOU LIKE TO DO?",
 
     # HUD
     "hud_waiting":      "Waiting for first rep...",
     "hud_correct_of":   "{correct}/{reps} correct",
     "hud_accuracy_pct": "  ({pct}%)",
     "hud_reps_label":   "REPS",
-    "hud_hints":        "Press SPACE to end   Press Q to quit",
+    "hud_pause_hint":   "Press P to pause",
+    "btn_end_exercise": "PRESS SPACE TO END THE EXERCISE",
 
     # Calibration
-    "calib_header":          "HAND CALIBRATION",
-    "calib_intro":           "We will measure your personal range of motion across {n} poses. Hold each pose when asked — press S to skip and use the defaults.",
-    "calib_begin":           "Press ENTER to begin",
+    "calib_intro_heading":   "GETTING TO KNOW YOUR HAND",
+    "calib_intro_body":      "Hold your hand flat and facing the camera. Calibration is simply the app getting used to your hand — hold each pose when asked and the rest happens by itself.",
+    "btn_start_calibration": "PRESS SPACE TO START CALIBRATION",
     "calib_skip_hint":       "Press S to skip calibration and use default settings",
     "calib_progress_header": "CALIBRATION  ({n} / {total})",
     "calib_ready_prompt":    "Press SPACE when you are in position",
@@ -61,7 +64,8 @@ STRINGS: dict[str, str] = {
     "calib_done":            "Done!",
     "calib_complete":        "Calibration complete!",
     "calib_skipped":         "Calibration skipped — using default settings.",
-    "calib_continue":        "Press ENTER to begin the exercise",
+    "calib_done_body":       "The real exercise will begin next — don't worry, it is the same motions you just practised. Just go through the motions.",
+    "btn_start_exercise":    "PRESS SPACE TO START EXERCISE",
 
     # Pause
     "pause_header":    "PAUSED",
@@ -75,10 +79,10 @@ STRINGS: dict[str, str] = {
     "report_col_reps":     "Reps",
     "report_col_correct":  "Correct",
     "report_col_accuracy": "Accuracy",
-    "report_total":        "Total",
-    "report_duration":     "Duration: {m}m {s}s",
-    "report_saved":        "Saved:  {filename}",
-    "report_hints":        "Press ENTER for new session   Press Q to quit",
+    "report_total":         "Total",
+    "report_duration":      "Duration: {m}m {s}s",
+    "report_saved":         "Saved:  {filename}",
+    "report_encouragement": "Well done — every session counts!",
 
     # Calibration pose titles and instructions
     "pose_open_title":           "Open Hand",

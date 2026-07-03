@@ -1,6 +1,7 @@
 """
 Session state machine and data model.
-Phases: MENU → CALIBRATION → COUNTDOWN → ACTIVE → REPORT → (MENU or quit)
+Phases: INJURY_SELECT → MENU → CALIB_INTRO → CALIBRATION → COUNTDOWN → ACTIVE → REPORT
+Q walks back one phase at each step (see back_to_* methods); ESC quits.
 """
 import time
 from dataclasses import dataclass, field
@@ -10,6 +11,7 @@ from enum import Enum, auto
 class SessionPhase(Enum):
     INJURY_SELECT = auto()
     MENU = auto()
+    CALIB_INTRO = auto()
     CALIBRATION = auto()
     COUNTDOWN = auto()
     ACTIVE = auto()
@@ -64,19 +66,21 @@ class Session:
         self.selected_exercise_idx: int = 0
         self.selected_injury_idx: int = 0
 
-    # ------------------------------------------------------------------
-    # Phase transitions
-    # ------------------------------------------------------------------
 
+    # Phase transitions
     def injury_confirmed(self):
         """Transition from INJURY_SELECT to MENU, resetting the exercise selection."""
         self.selected_exercise_idx = 0
         self.phase = SessionPhase.MENU
 
     def start_calibration(self, exercise_name: str, display_name: str):
-        """Transition from MENU to CALIBRATION, storing the pending exercise."""
+        """Transition from MENU to CALIB_INTRO, storing the pending exercise."""
         self._pending_exercise_name = exercise_name
         self._pending_display_name = display_name
+        self.phase = SessionPhase.CALIB_INTRO
+
+    def begin_calibration(self):
+        """Transition from CALIB_INTRO to CALIBRATION (user confirmed the explanation)."""
         self.phase = SessionPhase.CALIBRATION
 
     def calibration_complete(self):
@@ -128,8 +132,17 @@ class Session:
             self._current_log = None
         self.phase = SessionPhase.REPORT
 
-    def go_to_menu(self):
-        """Return to INJURY_SELECT from REPORT so patient re-selects category each session."""
+    # Back navigation (Q key / clicked keycap)
+    def back_to_menu(self):
+        """Back to the exercise menu (from CALIB_INTRO, COUNTDOWN cancel, or REPORT new-exercise)."""
+        self.phase = SessionPhase.MENU
+
+    def back_to_calib_intro(self):
+        """Back from CALIBRATION to the explanation screen (calibration is restarted fresh)."""
+        self.phase = SessionPhase.CALIB_INTRO
+
+    def back_to_injury_select(self):
+        """Back to the injury selection root screen (from MENU or REPORT)."""
         self.phase = SessionPhase.INJURY_SELECT
 
     def new_session(self):
@@ -139,10 +152,8 @@ class Session:
         self._countdown_start = None
         self.phase = SessionPhase.MENU
 
-    # ------------------------------------------------------------------
-    # Summary helpers
-    # ------------------------------------------------------------------
 
+    # Summary helpers
     @property
     def total_reps(self) -> int:
         return sum(log.total_reps for log in self.logs)

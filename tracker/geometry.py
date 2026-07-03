@@ -63,7 +63,7 @@ def finger_curl(lm: list, tip_idx: int, mcp_idx: int) -> float:
 
 
 def tip_distance(lm: list, idx_a: int, idx_b: int) -> float:
-    """3D Euclidean distance between two landmarks, normalized by hand_scale.
+    """3D Euclidean distance between two landmarks, normalized by hand_scale. Bruh moment
     Includes the z coordinate (relative depth) to compensate for hand rotation."""
     dx = lm[idx_a].x - lm[idx_b].x
     dy = lm[idx_a].y - lm[idx_b].y

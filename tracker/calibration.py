@@ -1,5 +1,5 @@
 """
-Per-session calibration — guides the user through 6 reference poses,
+Per-session calibration - guides the user through 6 reference poses,
 measures their personal range of motion, and updates THRESHOLDS in-place.
 """
 import time
@@ -87,10 +87,8 @@ class Calibrator:
         if "claw" in pose_keys:
             self._samples["claw_mcp"] = []
 
-    # ------------------------------------------------------------------
-    # Public read-only properties
-    # ------------------------------------------------------------------
 
+    # Public read-only properties
     @property
     def current_pose(self) -> CalibPose:
         return self._poses[self._pose_idx]
@@ -113,17 +111,15 @@ class Calibrator:
         elapsed = time.time() - self._phase_start
         return min(1.0, elapsed / _SAMPLE_DURATION)
 
-    # ------------------------------------------------------------------
-    # Main update — call every frame
-    # ------------------------------------------------------------------
 
+    # Main update — call every frame
     def start(self) -> None:
         """Called when the user presses Enter on the intro screen."""
         if not self.started and not self.done and not self.skipped:
             self.started = True
 
     def confirm_pose(self) -> None:
-        """Called when the user presses Space in READY phase — begins sampling."""
+        """Called when the user presses Space in READY phase - begins sampling."""
         if self.started and self._pose_phase == PosePhase.READY:
             self._transition(PosePhase.SAMPLING)
 
