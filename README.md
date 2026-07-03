@@ -2,7 +2,7 @@
 
 A real-time hand rehabilitation exercise tracker that uses your webcam and Google's MediaPipe to detect hand landmarks, count exercise reps, and generate session reports for patients and clinicians.
 
-Designed with rehab patients in mind — the system is intentionally lenient, encourages progress, and never penalises incomplete range of motion.
+Designed with rehab patients in mind, the system is intentionally lenient, encourages progress, and never penalises incomplete range of motion.
 
 ---
 
@@ -87,7 +87,7 @@ After the report, press Enter to start a new session from injury selection.
 
 ### Calibration
 
-Before each exercise the app asks you to hold a few reference poses (e.g. open hand, fist, pinch). This takes about 30 seconds and adjusts all detection thresholds to *your* range of motion. Skipping calibration (S) falls back to conservative defaults — calibrating gives better results.
+Before each exercise the app asks you to hold a few reference poses (e.g. open hand, fist, pinch). This takes about 30 seconds and adjusts all detection thresholds to *your* range of motion. Skipping calibration (S) falls back to conservative defaults, calibrating gives better results.
 
 ---
 
@@ -134,7 +134,7 @@ sessions/               # Auto-created output directory
 
 - Tracks one hand at a time
 - Claw hand is best observed from the side; the current top-down webcam view is a known limitation
-- MediaPipe's Z coordinate (depth) is less reliable than X/Y — useful for rotation correction but can be noisy
+- MediaPipe's Z coordinate (depth) is less reliable than X/Y, useful for rotation correction but can be noisy
 - Pause time is included in session duration figures
 
 ---
